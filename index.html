@@ -1,0 +1,235 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!--Extras-->
+    <script src="https://gftruj.github.io/webzamples/aframe/extras/aframe-extras.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+    <!--Oculus-->
+    <!--https://stackoverflow.com/questions/71131300/cant-move-camera-in-a-frame-with-oculus-quest-2-->
+    <!--script src="https://gftruj.github.io/webzamples/aframe/controls/oculus-thumbstick-controls.js"></script>
+    <script src="https://gftruj.github.io/webzamples/aframe/controls/oculus-touch-controls.js"></script>
+    <script src="https://gftruj.github.io/webzamples/aframe/controls/oculus-touch-controls-teleport.js"></script>
+    <script src="https://gftruj.github.io/webzamples/aframe/controls/oculus-touch-controls-transform.js"></script>
+    <script src="https://gftruj.github.io/webzamples/aframe/controls/oculus-touch-controls-vive.js"></script>
+    <script src="https://gftruj.github.io/webzamples/aframe/controls/oculus-touch-controls-wasd.js"></script>
+    <script src="https://gftruj.github.io/webzamples/aframe/controls/oculus-touch-controls-webxr.js"></script-->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+      nav {
+        position: fixed;
+        z-index: 10;
+        bottom: 0;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <button type="button" class="btn btn-secondary" onclick="moveCamera()">Mover cámara</button>
+      <button type="button" class="btn btn-primary" onclick="addElement()">Añadir elemento</button>
+    </nav>
+    <a-scene cursor="rayOrigin: mouse">
+      <!-- <a-entity light="type: ambient; color: #FFF; intensity:2"></a-entity>
+      <a-entity light="type: directional; color: #FFF; intensity: 2" position="0.5 1 1"></a-entity> -->
+
+      <a-entity environment="preset: forest"></a-entity>
+
+        <a-entity id="rig">
+          <a-camera position="0 1.6 0" look-controls wasd-controls="fly:true">
+            <a-cursor></a-cursor>
+          </a-camera>
+          <a-entity oculus-touch-controls="hand: left" oculus-thumbstick-controls></a-entity>
+          <a-entity oculus-touch-controls="hand: right" thumbstick-logging></a-entity>
+        </a-entity>
+
+       
+
+        <!-- CON ESTE SCRIPT NO FUNCIOANA EL TEXT script src="https://gftruj.github.io/webzamples/aframe/extras/aframe-extras.min.js"></script-->
+        <a-text value="Hello, World tomás!" color="black" width='1' height="auto"></a-text>
+
+        <a-torus color="#43A367" arc="270" radius="5" radius-tubular="0.1"></a-torus>
+
+  
+
+       
+
+        <a-assets>
+          <a-asset-item id="human-obj" src="assets/standard-male-figure-obj/standard-male-figure.obj"></a-asset-item>
+          <a-asset-item id="human-mtl" src="assets/standard-male-figure-obj/standard-male-figure.mtl"></a-asset-item>
+        </a-assets>
+
+        <a-entity id="humano" position="-2 0 0" rotation="0 0 0" obj-model="obj: #human-obj; mtl: #human-mtl" scale="0.05 0.05 0.05" disparo></a-entity>
+
+        <a-assets>
+          <a-asset-item id="ciudad-obj" src="assets/ciudad/model.obj"></a-asset-item>
+          <a-asset-item id="ciudad-mtl" src="assets/ciudad/materials.mtl"></a-asset-item>
+        </a-assets>
+
+        <a-entity id="ciudad" position="2 0 0" rotation="0 0 0" obj-model="obj: #ciudad-obj; mtl: #ciudad-mtl" scale="100 100 100" ></a-entity>
+
+        <!-- <a-assets>
+          <a-asset-item id="elephant-obj" src="assets/elephant/Elephant.obj"></a-asset-item>
+          <a-asset-item id="elephant-mtl" src="assets/elephant/Elephant.mtl"></a-asset-item>
+        </a-assets> -->
+
+
+
+        <!-- <a-entity position="-1 0 0" rotation="0 0 0" obj-model="obj: #elephant-obj; mtl: #elephant-mtl" scale="0.15 0.15 0.15"></a-entity>
+
+        <a-entity position="2 0 -6" scale="0.05 0.05 0.05" gltf-model="assets/zombie_dog/scene.gltf" disparo ></a-entity>
+        <a-entity position="2 0 -6" scale="0.05 0.05 0.05" gltf-model="assets/zombie_dog/Animated Platformer Character.glb" disparo ></a-entity> -->
+
+        <a-entity id="caminantes" position="2 0 -6" scale="0.5 0.5 0.5" animation="property: position; to: 1 8 0; dur: 5000; easing: linear; loop:true" gltf-model="assets/caminantes/Adventurer.glb" andar ></a-entity>
+        <a-entity id="caminantes2" position="4 0 -6" scale="0.5 0.5 0.5" gltf-model="assets/caminantes/Adventurer-2.glb" andar></a-entity>
+        <a-entity id="vegetable" position="2 0 -1" scale="0.5 0.5 0.5" light="type: directional; color: #FFF; intensity: 0.8" gltf-model="assets/vegetablegarden/Crops.glb" ></a-entity>
+
+        <!-- <a-sky color="#ECECEC" src="assets/Digital_Painting_equirectangular-jpg_nature_1118763042_9998827.jpg"></a-sky> -->
+
+    </a-scene>
+  </body>
+  <script>
+    // perrito = document.getElementById('perrito');
+    // perrito.addEventListener('click', function () {
+    //   alert("perrito");
+    //   perrito.setAttribute('animation-mixer', {clip : "Walk"});
+    // });
+
+    AFRAME.registerComponent('andar', {
+        init: function () {
+          var el = this.el;
+          el.addEventListener('click', function () {
+              console.log('caminantes');
+              el.setAttribute('animation-mixer', {clip: "CharacterArmature|Walk"});
+              el.setAttribute('animation', "property: position; to: 2 0 2")
+          });
+        }
+    });
+
+    AFRAME.registerComponent('andar', {
+        init: function () {
+          var el = this.el;
+          el.addEventListener('click', function () {
+              console.log('caminantes2');
+              el.setAttribute('animation-mixer', {clip: "CharacterArmature|Walk"});
+          });
+        }
+    });
+
+    AFRAME.registerComponent('thumbstick-logging',{
+      init: function () {
+        this.el.addEventListener('thumbstickmoved', this.logThumbstick);
+      },
+      logThumbstick: function (evt) {
+        if (evt.detail.y > 0.95) { console.log("DOWN"); }
+        if (evt.detail.y < -0.95) { console.log("UP"); }
+        if (evt.detail.x < -0.95) { console.log("LEFT"); }
+        if (evt.detail.x > 0.95) { console.log("RIGHT"); }
+      }
+    });
+    
+
+
+    AFRAME.registerComponent('handle-events', {
+       init: function () {
+         var el = this.el;
+         console.log(el)  //
+         el.addEventListener('mouseenter', function () {
+           console.log(el.getAttribute('data-info'));
+           console.log("mouseenter");
+
+         });
+         el.addEventListener('mouseleave', function () {
+             console.log(el.getAttribute('data-info'));
+             console.log("mouseleave");
+         });
+         el.addEventListener('click', function () {
+             console.log(el.getAttribute('data-info'));
+             console.log("click");
+             alert(el.getAttribute('data-info'));
+         });
+       }
+    });
+
+
+
+
+
+    // figura = document.getElementById('humano');
+    // figura.addEventListener('click', function () {
+    //   //figura.setAttribute('animation', "rotation; to: -90 0 0; dur: 2000; easing: linear; loop: true");
+    //   figura.setAttribute('animation', {'property': 'rotation', 'to': {x: -90, y: 0, z: 0}});
+    //   figure.removeAttribute('animation');
+    // });
+
+
+
+
+
+    AFRAME.registerComponent('disparo', {
+      init: function () {
+        var el = this.el;  // <a-box>
+        el.addEventListener('click', function () {
+          //alert("disparo de click");
+          //el.setAttribute('animation', "rotation; to: -90 0 0; dur: 2000; easing: linear; loop: true");
+          el.setAttribute('animation', {'property': 'rotation', 'to': {x: -90, y: 0, z: 0}});
+          //el.setAttribute('animation__001', {'property': 'position', 'to': {x: 1, y: 1, z: 1},'startEvents': 'startanim001'});
+        });
+      }
+    });
+
+
+
+
+    function moveCamera() {
+        pos = document.getElementsByTagName('a-camera')[0].getAttribute('position').z
+        document.getElementsByTagName('a-camera')[0].getAttribute('position').z = pos + 1;
+    }
+
+    function addElement() {
+      for(i=0;x.lenght > x; i++ ){
+        var scene = document.querySelector('a-scene');
+        var box = document.createElement('a-box');
+        box.setAttribute('position', {x: posx, y: posy, z: posz});
+        box.setAttribute('color', 'green');
+        box.setAttribute('data-info', 'Caja verde');
+        box.setAttribute('handle-events', '');
+        scene.appendChild(box);
+      }
+    }
+
+    // humano = document.getElementById('humano');
+    // humano.addEventListener('click', function () {
+    //   alert("humano");
+    //   humano.setAttribute('animation', "rotation; to: -90 0 0; dur: 2000; easing: linear; loop: true");
+    // });
+
+    AFRAME.registerComponent('change-color-on-hover', {
+      schema: {
+        color: {default: 'white'}
+      },
+      init: function () {
+        // Componente que cambia el color de un objeto al pasar el mouse por encima
+        var data = this.data; // Hace relación al schema
+        // el objeto que tiene el componente
+        var el = this.el;  // <a-box>
+        var defaultColor = el.getAttribute('material').color;
+
+        el.addEventListener('mouseenter', function () {
+          el.setAttribute('color', data.color);
+          el.removeAttribute('animation');
+        });
+        el.addEventListener('mouseleave', function () {
+          el.setAttribute('color', defaultColor);
+        });
+      }
+    });
+  </script>
+
+</html>
+
+
